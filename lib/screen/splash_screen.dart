@@ -4,7 +4,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:sms_buddy/screen/home_screen.dart';
+import 'package:sms_buddy/screen/auth/login_screen.dart';
 import 'package:sms_buddy/utils/utils.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -21,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
       Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
-              builder: (BuildContext context) => const HomeScreen()),
+              builder: (BuildContext context) => const LoginScreen()),
           (route) => false);
     });
     super.initState();
