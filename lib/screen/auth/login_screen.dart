@@ -157,7 +157,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Don\'t have a account?",
+                    Text("Don't have a account?",
                         style: TextStyle(fontSize: 17, color: Colors.white)),
                     InkWell(
                       onTap: (){

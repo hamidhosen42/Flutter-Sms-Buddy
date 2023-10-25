@@ -34,8 +34,10 @@ class _HomeScreenState extends State<HomeScreen> {
         future: ApiServices.getCategories(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: Lottie.asset('assets/json/loading.json',
-                width: 200, height:200),);
+            return Center(
+              child: Lottie.asset('assets/json/loading.json',
+                  width: 200, height: 200),
+            );
           } else {
             return Padding(
               padding: EdgeInsets.all(15),
