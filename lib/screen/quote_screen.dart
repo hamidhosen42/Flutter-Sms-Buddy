@@ -54,8 +54,6 @@ class _QuoteScreenState extends State<QuoteScreen> {
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
-                    height: 220,
-                    width: 400,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(25),
                         color: Colors.white.withOpacity(0.7),
@@ -68,10 +66,6 @@ class _QuoteScreenState extends State<QuoteScreen> {
                       padding: const EdgeInsets.all(12.0),
                       child: Column(
                         children: [
-                          CircleAvatar(
-                            backgroundImage:
-                                AssetImage("assets/image/birthday.png"),
-                          ),
                           SizedBox(
                             height: 15,
                           ),

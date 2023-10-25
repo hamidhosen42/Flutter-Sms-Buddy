@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:sms_buddy/screen/quote_screen.dart';
-import 'package:sms_buddy/utils/utils.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -23,10 +22,11 @@ class _HomeScreenState extends State<HomeScreen> {
     // final size = MediaQuery.sizeOf(context);
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
+        automaticallyImplyLeading: false,
+        // centerTitle: true,
         title: const Text(
           "Categories",
-          style: TextStyle(fontSize: 20, color: Colors.white),
+          style: TextStyle(fontSize: 25, color: Colors.white),
         ),
       ),
       body: Padding(
@@ -34,18 +34,8 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(
-              height: 5,
-            ),
-            Text(
-              Utils.relationStatus,
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(
-              height: 20,
+            SizedBox(
+              height: 10,
             ),
             Expanded(
               child: GridView.builder(
