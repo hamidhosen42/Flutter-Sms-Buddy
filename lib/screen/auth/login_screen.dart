@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:sms_buddy/screen/home_screen.dart';
+import 'package:sms_buddy/screen/create_post.dart';
 
 import '../../widgets/custom_login_button.dart';
 
@@ -116,7 +116,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 GestureDetector(
                   onTap: (){
-                    Navigator.of(context).push(MaterialPageRoute(builder: (contex)=>HomeScreen()));
+                    Navigator.of(context).push(MaterialPageRoute(builder: (contex)=>CreatePostScreen()));
                   },
                   child: customButton(level: "Login")),
                 const SizedBox(
