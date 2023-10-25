@@ -47,7 +47,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 Text(
                   Utils.appName,
                   style: TextStyle(
-                      fontSize: 30,
+                      fontSize: 28,
                       letterSpacing: 1,
                       color: Colors.green.shade700,
                       fontWeight: FontWeight.w800,
