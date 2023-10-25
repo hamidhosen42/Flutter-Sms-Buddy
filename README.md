@@ -13,5 +13,7 @@ A few resources to get you started if this is your first Flutter project:
 
 ### API
 1. Model create (https://app.quicktype.io/)
-2. 
+2. API url
+3. http use -> api url hit
+4. data load
 
