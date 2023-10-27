@@ -1,10 +1,12 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, unused_field, avoid_print
 
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:lottie/lottie.dart';
 import 'package:sms_buddy/core/services/api_services.dart';
 import 'package:sms_buddy/screen/quote_screen.dart';
 import 'package:sms_buddy/utils/app_urls.dart';
+import 'package:sms_buddy/utils/config.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -20,6 +22,39 @@ class _HomeScreenState extends State<HomeScreen> {
   //   {"status": "Motivational", "icon": "assets/image/motivational.png"},
   //   {"status": "BreakUps", "icon": "assets/image/sad.png"},
   // ];
+
+
+  // ! ======== google ad ======
+
+  BannerAd? _bannerAd;
+  bool isBannerAdLoaded = false;
+
+  loadBannerAd(){
+    _bannerAd = BannerAd(
+      size: AdSize.banner, 
+      adUnitId: AppConfig.bannerAdUnit, 
+      listener: BannerAdListener(
+        onAdLoaded: (ad) {
+          print("Banner ad Loaded");
+          setState(() {
+            isBannerAdLoaded = true;
+          });
+        },
+        onAdFailedToLoad: (ad, error) {
+          print('Failed to load Banner $error');
+          ad.dispose();
+        },
+      ), 
+      request: const AdRequest())..load();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    loadBannerAd();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -105,6 +140,11 @@ class _HomeScreenState extends State<HomeScreen> {
           }
         },
       ),
+      bottomNavigationBar: isBannerAdLoaded ?SizedBox(
+        height: _bannerAd!.size.height.toDouble(),
+        width: _bannerAd!.size.width.toDouble(),
+        child: AdWidget(ad: _bannerAd!),
+      ):SizedBox(),
     );
   }
 }

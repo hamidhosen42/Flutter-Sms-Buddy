@@ -17,3 +17,11 @@ A few resources to get you started if this is your first Flutter project:
 3. http use -> api url hit
 4. data load
 
+### add id:
+
+```
+Test Banner Ad Unit: ca-app-pub-3940256099942544/6300978111
+Test Interstitial Ad Unit: ca-app-pub-3940256099942544/1033173712
+Test Reward Ad Unit: ca-app-pub-3940256099942544/5224354917
+```
+
