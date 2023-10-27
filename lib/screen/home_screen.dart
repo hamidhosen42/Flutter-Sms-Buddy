@@ -23,37 +23,81 @@ class _HomeScreenState extends State<HomeScreen> {
   //   {"status": "BreakUps", "icon": "assets/image/sad.png"},
   // ];
 
-
   // ! ======== google ad ======
 
+  //! Banner add
   BannerAd? _bannerAd;
+
+  // ! Inter ads Intance
+  InterstitialAd? _interstitialAd;
+
+  // !Reward Ads Instance
+  RewardedAd? _rewardedAd;
+
+  // ! check if banner ad loaded
   bool isBannerAdLoaded = false;
 
-  loadBannerAd(){
+  // ! load banner ad
+  loadBannerAd() {
     _bannerAd = BannerAd(
-      size: AdSize.banner, 
-      adUnitId: AppConfig.bannerAdUnit, 
-      listener: BannerAdListener(
-        onAdLoaded: (ad) {
-          print("Banner ad Loaded");
+        size: AdSize.banner,
+        adUnitId: AppConfig.bannerAdUnit,
+        listener: BannerAdListener(
+          onAdLoaded: (ad) {
+            print("Banner ad Loaded");
+            setState(() {
+              isBannerAdLoaded = true;
+            });
+          },
+          onAdFailedToLoad: (ad, error) {
+            print('Failed to load Banner $error');
+            ad.dispose();
+          },
+        ),
+        request: const AdRequest())
+      ..load();
+  }
+
+  // ! load InterstitialAd
+  loadInterstitialAd() {
+    InterstitialAd.load(
+        adUnitId: AppConfig.interAdUnit,
+        request: const AdRequest(),
+        adLoadCallback: InterstitialAdLoadCallback(onAdLoaded: (ad) {
+          print("Inter ad Loaded");
           setState(() {
-            isBannerAdLoaded = true;
+            _interstitialAd = ad;
           });
-        },
-        onAdFailedToLoad: (ad, error) {
-          print('Failed to load Banner $error');
-          ad.dispose();
-        },
-      ), 
-      request: const AdRequest())..load();
+        }, onAdFailedToLoad: (error) {
+          print('Failed to Inter Load $error');
+        }));
+  }
+
+  // ! Load Reward Video Ad
+  loadVideoAd(){
+    RewardedAd.load(
+      adUnitId: AppConfig.rewardAdUnit,
+       request: const AdRequest(), 
+       rewardedAdLoadCallback: RewardedAdLoadCallback(
+        onAdLoaded: (ad){
+          print("Reward ad Loaded");
+          setState(() {
+            _rewardedAd = ad;
+          });
+        }, 
+        onAdFailedToLoad: (error){
+           print('Failed to reward Load $error');
+        })
+       );
   }
 
   @override
   void initState() {
     super.initState();
     loadBannerAd();
+    loadInterstitialAd();
+    loadVideoAd();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -96,6 +140,14 @@ class _HomeScreenState extends State<HomeScreen> {
                           final data = snapshot.data![index];
                           return InkWell(
                             onTap: () {
+                              loadVideoAd();
+                              _rewardedAd!.show(onUserEarnedReward: ( ad, reward) {
+                                // !Logic
+                                // !User 100 coin
+                                print("Add watched");
+                              },);
+                              // loadInterstitialAd();
+                              // _interstitialAd!.show();
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) => QuoteScreen(
                                       categoryName: data.name.toString(),
@@ -140,11 +192,13 @@ class _HomeScreenState extends State<HomeScreen> {
           }
         },
       ),
-      bottomNavigationBar: isBannerAdLoaded ?SizedBox(
-        height: _bannerAd!.size.height.toDouble(),
-        width: _bannerAd!.size.width.toDouble(),
-        child: AdWidget(ad: _bannerAd!),
-      ):SizedBox(),
+      bottomNavigationBar: isBannerAdLoaded
+          ? SizedBox(
+              height: _bannerAd!.size.height.toDouble(),
+              width: _bannerAd!.size.width.toDouble(),
+              child: AdWidget(ad: _bannerAd!),
+            )
+          : SizedBox(),
     );
   }
 }

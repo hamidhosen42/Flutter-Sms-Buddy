@@ -17,7 +17,9 @@ A few resources to get you started if this is your first Flutter project:
 3. http use -> api url hit
 4. data load
 
-### add id:
+### add id: 
+
+https://developers.google.com/admob/flutter/quick-start
 
 ```
 Test Banner Ad Unit: ca-app-pub-3940256099942544/6300978111
